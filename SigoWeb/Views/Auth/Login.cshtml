@@ -1,0 +1,35 @@
+﻿@using SigoWeb.Models
+@model LoginModel
+
+@{
+    ViewBag.Title = "Entrar";
+    Layout = "~/Views/Shared/_LayoutEmpty.cshtml";
+}
+
+<div class="container">
+    <div class="row pb30">
+        <div class="col-lg-4 col-md-6 mr-auto ml-auto col-sm-8">
+            <h3 class="text-white text-center mb30">@ViewBag.Title</h3>
+            @using (Html.BeginForm("Login", "Auth", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, true, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @style = "text-align: center;" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @style = "text-align: center;" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+                <div style="text-align: center; margin-top: 30px;">
+                    <button type="submit" class="btn btn-primary btn-xl"> Entrar </button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
