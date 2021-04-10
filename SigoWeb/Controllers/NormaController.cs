@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace SigoWeb.Controllers
 {
+    [Authorize]
     public class NormaController : Controller
     {
         private readonly IRefitNormas _refitNorma;

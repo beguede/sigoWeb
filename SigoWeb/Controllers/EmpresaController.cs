@@ -11,21 +11,22 @@ using System.Threading.Tasks;
 
 namespace SigoWeb.Controllers
 {
+    [Authorize]
     public class EmpresaController : Controller
     {
-        private readonly IRefitEmpresas _refitEmpresa;
+        private readonly IRefitConsultorias _refitConsultoria;
         private readonly string _token;
 
-        public EmpresaController(IHttpContextAccessor httpContextAccessor, IRefitEmpresas refitEmpresa)
+        public EmpresaController(IHttpContextAccessor httpContextAccessor, IRefitConsultorias refitConsultoria)
         {
-            _refitEmpresa = refitEmpresa;
+            _refitConsultoria = refitConsultoria;
             _token = $"Bearer {httpContextAccessor.HttpContext.Request.Cookies["token"]}";
         }
 
         public async Task<IActionResult> Index()
         {
             IList<EmpresaModel> empresaModel = new List<EmpresaModel>();
-            var empresaResult = await _refitEmpresa.ObterEmpresasAsync(_token);
+            var empresaResult = await _refitConsultoria.ObterEmpresasAsync(_token);
             if (empresaResult.IsSuccessStatusCode)
             {
                 var response = await empresaResult.Content.ReadAsStringAsync();
@@ -35,14 +36,14 @@ namespace SigoWeb.Controllers
             {
                 return RedirectToAction("SemPermissao", "Auth");
             }
-            return View(empresaModel.OrderBy(x => x.DataPublicacao));
+            return View(empresaModel.OrderBy(x => x.NomeFantasia));
         }
 
         public async Task<IActionResult> Details(Guid id)
         {
             EmpresaModel empresaModel = new EmpresaModel();
 
-            var empresaResult = await _refitEmpresa.ObterEmpresaPorIdAsync(_token, id);
+            var empresaResult = await _refitConsultoria.ObterEmpresaPorIdAsync(_token, id);
             if (empresaResult.IsSuccessStatusCode)
             {
                 var response = await empresaResult.Content.ReadAsStringAsync();
@@ -68,7 +69,7 @@ namespace SigoWeb.Controllers
             {
                 empresaModel.Id = Guid.NewGuid();
 
-                var empresaResult = await _refitEmpresa.InserirEmpresaAsync(_token, empresaModel);
+                var empresaResult = await _refitConsultoria.InserirEmpresaAsync(_token, empresaModel);
                 if (empresaResult.IsSuccessStatusCode)
                 {
                     return RedirectToAction("Index");
@@ -86,7 +87,7 @@ namespace SigoWeb.Controllers
         {
             EmpresaModel empresaModel = new EmpresaModel();
 
-            var empresaResult = await _refitEmpresa.ObterEmpresaPorIdAsync(_token, id);
+            var empresaResult = await _refitConsultoria.ObterEmpresaPorIdAsync(_token, id);
             if (empresaResult.IsSuccessStatusCode)
             {
                 var response = await empresaResult.Content.ReadAsStringAsync();
@@ -105,7 +106,7 @@ namespace SigoWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var empresaResult = await _refitEmpresa.AtualizarEmpresaAsync(_token, empresaModel);
+                var empresaResult = await _refitConsultoria.AtualizarEmpresaAsync(_token, empresaModel);
                 if (empresaResult.IsSuccessStatusCode)
                 {
                     return RedirectToAction("Index");
@@ -123,7 +124,7 @@ namespace SigoWeb.Controllers
         {
             EmpresaModel empresaModel = new EmpresaModel();
 
-            var empresaResult = await _refitEmpresa.ObterEmpresaPorIdAsync(_token, id);
+            var empresaResult = await _refitConsultoria.ObterEmpresaPorIdAsync(_token, id);
             if (empresaResult.IsSuccessStatusCode)
             {
                 var response = await empresaResult.Content.ReadAsStringAsync();
@@ -142,7 +143,7 @@ namespace SigoWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var empresaResult = await _refitEmpresa.ExluirEmpresaAsync(_token, empresaModel.Id.Value);
+                var empresaResult = await _refitConsultoria.ExluirEmpresaAsync(_token, empresaModel.Id.Value);
                 if (empresaResult.IsSuccessStatusCode)
                 {
                     return RedirectToAction("Index");

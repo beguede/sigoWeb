@@ -55,6 +55,7 @@ namespace SigoWeb.Controllers
             return View(model);
         }
 
+        [Authorize]
         [HttpPost]
         [AllowAnonymous]
         public ActionResult LogOff()
@@ -63,6 +64,7 @@ namespace SigoWeb.Controllers
             return RedirectToAction("Login", "Auth");
         }
 
+        [Authorize]
         public ActionResult SemPermissao()
         {
             return View();

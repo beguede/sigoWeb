@@ -15,13 +15,8 @@ namespace SigoWeb.Controllers
             _logger = logger;
         }
 
+        [Authorize]
         public IActionResult Index()
-        {
-            return View();
-        }
-
-        [Authorize("Admin")]
-        public IActionResult Privacy()
         {
             return View();
         }

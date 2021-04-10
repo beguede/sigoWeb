@@ -1,0 +1,88 @@
+﻿@using SigoWeb.Models
+@model IEnumerable<ConsultoriaModel>
+
+@{
+    ViewBag.Title = "Consultorias";
+}
+
+<div class="page-subheader">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-12">
+                <div class="list">
+                    <div class="list-item pl-0">
+                        <div class="list-thumb ml-0 mr-3 pr-3  b-r text-muted">
+                            <i class="fa fa-users"></i>
+                        </div>
+                        <div class="list-body">
+                            <div class="list-title fs-2x">
+                                <h3>@ViewBag.Title</h3>
+                            </div>
+                        </div>
+                        <a href="@Url.Action("Create")" class="btn btn-primary btn-sm">
+                            <i class="fa fa-plus"></i>
+                            Nova
+                        </a>
+                        <a href="@Url.Action("Index", "Empresa")" class="btn btn-success btn-sm">
+                            Cadastro de Empresas
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-white table-responsive rounded shadow-sm pt-3 pb-3 mb-30">
+    <table id="data-table" class="table table-striped table-responsive-sm" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>@Html.LabelFor(model => model.FirstOrDefault().DataInicio)</th>
+                <th>@Html.LabelFor(model => model.FirstOrDefault().DataFim)</th>
+                <th>@Html.LabelFor(model => model.FirstOrDefault().Empresa.NomeFantasia)</th>
+                <th>@Html.LabelFor(model => model.FirstOrDefault().Norma.Codigo)</th>
+                <th>@Html.Label("Ações")</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td style="vertical-align: middle;">
+                    @Html.DisplayFor(modelItem => item.DataInicio)
+                </td>
+                <td style="vertical-align: middle;">
+                    @Html.DisplayFor(modelItem => item.DataFim)
+                </td>
+                <td style="vertical-align: middle;">
+                    @Html.DisplayFor(modelItem => item.Empresa.NomeFantasia)
+                </td>
+                <td style="vertical-align: middle;">
+                    @Html.DisplayFor(modelItem => item.Norma.Codigo)
+                </td>
+                <td style="vertical-align: middle;">
+                    <a href="@Url.Action("Details", new { id = item.Id })" class="btn btn-info btn-sm">
+                        Detalhes
+                    </a>
+                    <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-warning btn-sm">
+                        Alterar
+                    </a>
+                    <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-danger btn-sm">
+                        Excluir
+                    </a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+
+        $(document).ready(function ($) {
+
+        });
+
+    </script>
+}

@@ -1,4 +1,5 @@
 ﻿using Refit;
+using SigoWeb.Models;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -9,34 +10,78 @@ namespace SigoWeb.Infrastructure.Requests
     {
         #region Empresas
         /// <summary>
-        /// Obter Empresas do serviço
+        /// Obter lista de empresas
         /// </summary>
+        /// <param name="authorization"></param>
         /// <returns></returns>
         [Get("/v1/empresas")]
-        Task<HttpResponseMessage> ObterNormasAsync([Header("Authorization")] string authorization);
+        Task<HttpResponseMessage> ObterEmpresasAsync([Header("Authorization")] string authorization);
 
         /// <summary>
-        /// Obter Empresa pelo id
+        /// Obter empresa pelo id
         /// </summary>
         /// <returns></returns>
         [Get("/v1/empresas/{id}")]
-        Task<HttpResponseMessage> ObterNormaPorIdAsync([Header("Authorization")] string authorization, Guid id);
+        Task<HttpResponseMessage> ObterEmpresaPorIdAsync([Header("Authorization")] string authorization, Guid id);
+
+        /// <summary>
+        /// Inserir empresa
+        /// </summary>
+        /// <returns></returns>
+        [Post("/v1/empresas")]
+        Task<HttpResponseMessage> InserirEmpresaAsync([Header("Authorization")] string authorization, [Body] EmpresaModel normaModel);
+
+        /// <summary>
+        /// Atualizar empresa
+        /// </summary>
+        /// <returns></returns>
+        [Put("/v1/empresas")]
+        Task<HttpResponseMessage> AtualizarEmpresaAsync([Header("Authorization")] string authorization, [Body] EmpresaModel normaModel);
+
+        /// <summary>
+        /// Excluir empresa
+        /// </summary>
+        /// <returns></returns>
+        [Delete("/v1/empresas/{id}")]
+        Task<HttpResponseMessage> ExluirEmpresaAsync([Header("Authorization")] string authorization, Guid id);
         #endregion
 
         #region Consultorias
         /// <summary>
-        /// Obter Consultorias do serviço
+        /// Obter lista de consultorias
         /// </summary>
+        /// <param name="authorization"></param>
         /// <returns></returns>
         [Get("/v1/consultorias")]
         Task<HttpResponseMessage> ObterConsultoriasAsync([Header("Authorization")] string authorization);
 
         /// <summary>
-        /// Obter Consultoria pelo id
+        /// Obter consultoria pelo id
         /// </summary>
         /// <returns></returns>
         [Get("/v1/consultorias/{id}")]
         Task<HttpResponseMessage> ObterConsultoriaPorIdAsync([Header("Authorization")] string authorization, Guid id);
+
+        /// <summary>
+        /// Inserir consultoria
+        /// </summary>
+        /// <returns></returns>
+        [Post("/v1/consultorias")]
+        Task<HttpResponseMessage> InserirConsultoriaAsync([Header("Authorization")] string authorization, [Body] ConsultoriaModel consultoriaModel);
+
+        /// <summary>
+        /// Atualizar consultoria
+        /// </summary>
+        /// <returns></returns>
+        [Put("/v1/consultorias")]
+        Task<HttpResponseMessage> AtualizarConsultoriaAsync([Header("Authorization")] string authorization, [Body] ConsultoriaModel consultoriaModel);
+
+        /// <summary>
+        /// Excluir consultoria
+        /// </summary>
+        /// <returns></returns>
+        [Delete("/v1/consultorias/{id}")]
+        Task<HttpResponseMessage> ExluirConsultoriaAsync([Header("Authorization")] string authorization, Guid id);
         #endregion
     }
 }

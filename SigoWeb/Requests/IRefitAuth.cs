@@ -12,7 +12,7 @@ namespace SigoWeb.Infrastructure.Requests
         /// Obter token de acesso
         /// </summary>
         /// <returns></returns>
-        [Post("/v1/auth/usuario/gerar-token")]
+        [Post("/v1/acessar")]
         Task<HttpResponseMessage> ObterTokenAsync([Body] LoginModel loginModel);
         #endregion
     }

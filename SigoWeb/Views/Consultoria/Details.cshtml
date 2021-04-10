@@ -1,0 +1,69 @@
+﻿@model SigoWeb.Models.ConsultoriaModel
+
+@{
+    ViewBag.Title = "Consultoria";
+    ViewBag.SubTitle = "Detalhes da consultoria";
+}
+
+<div style="margin-bottom: 50px">
+    <h3>@ViewBag.Title</h3>
+    <span>@ViewBag.SubTitle</span>
+</div>
+
+<div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-row">
+            <div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                @Html.LabelFor(model => model.DataInicio, new { @class = "required" })
+                @Html.TextBoxFor(model => model.DataInicio, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date", @readonly = true })
+                @Html.ValidationMessageFor(model => model.DataInicio, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                @Html.LabelFor(model => model.DataFim, new { @class = "required" })
+                @Html.TextBoxFor(model => model.DataFim, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date", @readonly = true })
+                @Html.ValidationMessageFor(model => model.DataFim, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                @Html.LabelFor(model => model.Situacao, new { @class = "required" })
+                @Html.EditorFor(model => model.Situacao, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                @Html.ValidationMessageFor(model => model.Situacao, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                @Html.LabelFor(model => model.EmpresaId, new { @class = "required" })
+                @Html.DropDownListFor(model => model.EmpresaId, null, "Selecione uma empresa...", new { @class = "form-control", @disabled = "disabled" })
+                @Html.ValidationMessageFor(model => model.EmpresaId, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                @Html.LabelFor(model => model.NormaId, new { @class = "required" })
+                @Html.DropDownListFor(model => model.NormaId, null, "Selecione uma norma...", new { @class = "form-control", @disabled = "disabled" })
+                @Html.ValidationMessageFor(model => model.NormaId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                @Html.LabelFor(model => model.Descricao, new { @class = "beguede-required" })
+                @Html.TextAreaFor(model => model.Descricao, htmlAttributes: new { @class = "form-control", @rows = 5, @readonly = true })
+                @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-footer">
+            <button onclick="location.href='@Url.Action("Index")'" type="button" class="btn btn-primary"> Ok </button>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+
+        $(document).ready(function ($) {
+
+        });
+
+    </script>
+}

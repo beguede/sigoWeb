@@ -34,19 +34,19 @@ namespace SigoWeb
             services.AddRefitClient<IRefitAuth>()
               .ConfigureHttpClient(c =>
               {
-                  c.BaseAddress = new Uri("http://andremagalhaes-001-site8.etempurl.com/api");
+                  c.BaseAddress = new Uri("http://andremagalhaes-001-site2.etempurl.com/api");
               });
 
             services.AddRefitClient<IRefitNormas>()
               .ConfigureHttpClient(c =>
               {
-                  c.BaseAddress = new Uri("http://andremagalhaes-001-site9.etempurl.com/api");
+                  c.BaseAddress = new Uri("http://andremagalhaes-001-site2.etempurl.com/api");
               });
 
             services.AddRefitClient<IRefitConsultorias>()
               .ConfigureHttpClient(c =>
               {
-                  c.BaseAddress = new Uri("http://andremagalhaes-001-site10.etempurl.com/api");
+                  c.BaseAddress = new Uri("http://andremagalhaes-001-site2.etempurl.com/api");
               });
 
             //Token JWT
